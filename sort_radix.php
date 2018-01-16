@@ -26,10 +26,11 @@
     </div>
     <hr>
 
-    <button id="btn_new" onclick="alert('New List!')">New List!</button>
-    <button id="btn_sort" onclick="alert('Sort!')">Sort!</button>
-    <button id="btn_reset" onclick="alert('Reset!')">Reset!</button>
-
+    <button id="btn_new">New List!</button>
+    <button id="btn_sort">Sort!</button>
+    <button id="btn_reset">Reset!</button>
+    <hr>
+    
     <div id="sort">
 
     </div>

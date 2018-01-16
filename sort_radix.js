@@ -1,3 +1,7 @@
+// Variables that I want in scope everywhere
+var list = new Array(0)
+var numIntsToGenerate = 48
+
 $(function(){
   console.log("Called the sorting js file properly.")
 
@@ -5,15 +9,63 @@ $(function(){
   var canvWid = 1000
   var canvHei = 500
 
-  // Create the canvas
-  var paper = Raphael("sort", canvWid, canvHei)
+  var paper = Raphael("sort", canvWid, canvHei) // Create the canvas
   var border = paper.rect(0,0,canvWid,canvHei)  // Border of the canvas
-  console.log("Created the canvas with size; Width: ",canvWid, "Height: ",canvHei)
-
   var sq = paper.rect(500,250,50,50,10)
 
-  var callDraw = setInterval(function(){ sq = draw(paper, sq) }, 10)
+  // Draw the number cells, empty
+  var cells = paper.set() // Create the cell reference
+  for(i=1;i<numIntsToGenerate+1;i++){
+    cells.push(paper.rect(i*20,20,20,20))
+  }
+  // cells.attr({fill: "gray"})
 
+  // var callDraw = setInterval(function(){ sq = draw(paper, sq) }, 10)
+
+  $("#btn_new").on("click",function(){
+    console.log("Clicked btn_new.")
+
+    // Clean the list if we've already made one before
+    if(list.length > 0)
+        list = new Array(0)
+
+    var minInt = 1; var maxInt = 1000;
+    while(list.length < numIntsToGenerate){
+        // Generate a number
+        var newNum = Math.floor(Math.random() * (maxInt - minInt + 1)) + minInt
+        // console.log("Generated",newNum)
+        // Check if number is already in the array
+        if(!list.includes(newNum)){
+          list.push(newNum);
+          // console.log("Added",newNum,"to the list.")
+        }
+        else{
+          console.log("Not a unique number.");
+        }
+
+    }
+
+    // Print the array of numbers now
+    console.log(list)
+
+    // Draw the numbers in the cells
+    console.log(cells)
+
+  })
+
+  $("#btn_sort").on("click",function(){
+    console.log("Clicked btn_sort.")
+
+    // Call the sort function to start the process
+
+  })
+
+  $("#btn_reset").on("click",function(){
+    console.log("Clicked btn_reset.")
+
+    // Reset everything back to the start
+
+  })
 })
 
 function draw(paper, el) {
@@ -24,19 +76,3 @@ function draw(paper, el) {
 
   return el
 }
-
-// for (var a=[],i=0;i<40;++i) a[i]=i;
-//
-// // http://stackoverflow.com/questions/962802#962890
-// function shuffle(array) {
-//   var tmp, current, top = array.length;
-//   if(top) while(--top) {
-//     current = Math.floor(Math.random() * (top + 1));
-//     tmp = array[current];
-//     array[current] = array[top];
-//     array[top] = tmp;
-//   }
-//   return array;
-// }
-//
-// a = shuffle(a);
